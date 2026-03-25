@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REALSELER Premium ID Store</title>
+  <title> REALSELER Premium ID Store</title>
   <meta name="description" content="Premium verified IDs - Instant delivery after payment">
 
   <style>
@@ -84,9 +84,30 @@
       font-weight: 900;
       cursor: pointer;
       transition: transform 0.2s;
+      margin-bottom: 12px;
     }
     .buy:hover { transform: scale(1.03); }
     .buy:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* New Normal IDs Button */
+    .normal-btn {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #6b5cff;
+      border-radius: 50px;
+      background: white;
+      color: #6b5cff;
+      font-size: 1.1rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .normal-btn:hover {
+      background: #6b5cff;
+      color: white;
+      transform: scale(1.03);
+    }
+
     .icons { display: flex; justify-content: space-around; margin-top: 20px; font-size: 0.9rem; color: #555; }
     .icon { text-align: center; cursor: pointer; }
     .icon div {
@@ -171,7 +192,12 @@
     </div>
 
     <input type="number" class="custom" placeholder="Custom quantity" min="1" oninput="customQty(this.value)">
-    <button class="buy" id="buy" disabled>Buy Now</button>
+    
+    <!-- Premium Buy Button -->
+    <button class="buy" id="buy" disabled>Buy Now (Premium)</button>
+    
+    <!-- New Normal IDs Button -->
+    <button class="normal-btn" onclick="openNormalIDs()">Normal IDs</button>
 
     <div class="icons">
       <div class="icon"><div>🔒</div>Secure</div>
@@ -315,14 +341,14 @@
     qty = q;
     document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
-    buyBtn.textContent = `Buy Now ₹${qty * price}`;
+    buyBtn.textContent = `Buy Now (Premium) ₹${qty * price}`;
     buyBtn.disabled = false;
   };
 
   window.customQty = (val) => {
     qty = Number(val) || 0;
     if (qty > 0) {
-      buyBtn.textContent = `Buy Now ₹${qty * price}`;
+      buyBtn.textContent = `Buy Now (Premium) ₹${qty * price}`;
       buyBtn.disabled = false;
     } else {
       buyBtn.disabled = true;
@@ -353,6 +379,14 @@
 
     const upiLink = `upi://pay?pa=${upi}&pn=ARYAN%20RAJ%20STORE&am=${qty * price}&cu=INR`;
     qrEl.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+  };
+
+  // ================== NEW FUNCTION FOR NORMAL IDs BUTTON ==================
+  window.openNormalIDs = () => {
+    // Yahan apna Normal IDs ka link daal do
+    // Example: window.location.href = "https://your-normal-ids-link.com";
+    
+    window.location.href = "https://example.com/normal-ids";   // ←←← YAHAN APNA LINK CHANGE KAR DO
   };
 
   window.submit = () => {
