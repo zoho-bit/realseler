@@ -3,145 +3,262 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REALSELER Premium ID Store</title>
+  <title>REALSELER • Premium ID Store</title>
   <meta name="description" content="Premium verified IDs - Instant delivery after payment">
-
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
     body {
-      background: linear-gradient(180deg, #5b4bdb, #7b6cf6);
+      background: linear-gradient(135deg, #4f46e5, #7c3aed, #c026d3);
       color: #333;
-      padding: 15px;
       min-height: 100vh;
+      padding: 15px 10px;
     }
-    .container { max-width: 420px; margin: 0 auto; }
-    .card {
-      background: white;
+    .container {
+      max-width: 440px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .header-bar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 20px;
+      padding: 16px 20px;
       margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-    }
-    .header {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #6b5cff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      position: sticky;
+      top: 10px;
+      z-index: 200;
     }
-    .header small { font-size: 0.9rem; color: #777; font-weight: 400; }
-    .badge {
-      background: #ffecec;
-      color: #e63946;
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 0.85rem;
-      margin: 12px auto;
-      width: fit-content;
-      display: block;
-    }
-    .stock { text-align: center; font-size: 1.9rem; font-weight: 900; color: #6b5cff; margin: 15px 0; }
-    .note {
-      background: #f0f2ff;
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 0.95rem;
-      color: #444;
-      margin: 12px 0;
-      line-height: 1.5;
-    }
-    .options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 15px 0; }
-    .box {
-      background: #f8f9ff;
-      border: 2px solid transparent;
-      border-radius: 16px;
-      padding: 16px;
-      text-align: center;
+    .logo {
+      font-size: 1.75rem;
       font-weight: 800;
+      color: #4f46e5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-btn {
+      background: #f8fafc;
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 28px;
+      color: #4f46e5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      transition: all 0.3s;
+    }
+    .menu-btn:hover {
+      transform: scale(1.1);
+      background: #f1f5f9;
+    }
+    .dropdown {
+      position: absolute;
+      top: 78px;
+      right: 15px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      width: 235px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: all 0.35s ease;
+      z-index: 300;
+    }
+    .dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
+      text-decoration: none;
+      color: #1e2937;
+      font-weight: 600;
+      border-bottom: 1px solid #f1f5f9;
       transition: all 0.2s;
     }
-    .box.active { border-color: #6b5cff; background: #eef0ff; color: #6b5cff; }
-    .box span { display: block; font-size: 0.9rem; color: #666; margin-top: 6px; }
+    .dropdown a:last-child {
+      border-bottom: none;
+    }
+    .dropdown a:hover {
+      background: #f0f4ff;
+      color: #4f46e5;
+      padding-left: 28px;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    }
+    .badge {
+      background: linear-gradient(90deg, #ef4444, #f97316);
+      color: white;
+      padding: 7px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      width: fit-content;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
+    .stock {
+      text-align: center;
+      font-size: 2.15rem;
+      font-weight: 900;
+      color: #4f46e5;
+      margin: 15px 0;
+    }
+    .note {
+      background: #f0f4ff;
+      border-radius: 18px;
+      padding: 18px;
+      font-size: 0.98rem;
+      color: #334155;
+      margin: 18px 0;
+      line-height: 1.6;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+    }
+    .box {
+      background: #f8fafc;
+      border: 2.5px solid transparent;
+      border-radius: 18px;
+      padding: 18px 12px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 1.08rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.18);
+    }
+    .box.active {
+      border-color: #4f46e5;
+      background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+      color: #4f46e5;
+    }
+    .box span {
+      display: block;
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 6px;
+      font-weight: 500;
+    }
     input[type="number"], .custom {
       width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      border: 1.5px solid #ddd;
-      border-radius: 12px;
-      font-size: 1rem;
+      padding: 16px;
+      margin: 16px 0;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      font-size: 1.05rem;
+    }
+    input:focus, .custom:focus {
+      border-color: #4f46e5;
+      outline: none;
     }
     .buy {
       width: 100%;
-      padding: 16px;
+      padding: 18px;
       border: none;
       border-radius: 50px;
-      background: linear-gradient(90deg, #ff4d4d, #ff2f7b);
+      background: linear-gradient(90deg, #ef4444, #ec4899);
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.18rem;
       font-weight: 900;
       cursor: pointer;
-      transition: transform 0.2s;
-      margin-bottom: 12px;
+      transition: all 0.3s;
+      margin: 12px 0;
+      box-shadow: 0 8px 22px rgba(236, 72, 153, 0.4);
     }
-    .buy:hover { transform: scale(1.03); }
-    .buy:disabled { background: #ccc; cursor: not-allowed; }
-
-    .normal-btn {
-      width: 100%;
-      padding: 16px;
-      border: 2px solid #6b5cff;
-      border-radius: 50px;
-      background: white;
-      color: #6b5cff;
-      font-size: 1.1rem;
-      font-weight: 900;
+    .buy:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(236, 72, 153, 0.5);
+    }
+    .buy:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .icons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+    .icon {
+      text-align: center;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .normal-btn:hover {
-      background: #6b5cff;
-      color: white;
-      transform: scale(1.03);
-    }
-
-    .icons { display: flex; justify-content: space-around; margin-top: 20px; font-size: 0.9rem; color: #555; }
-    .icon { text-align: center; cursor: pointer; }
+    .icon:hover { transform: scale(1.08); }
     .icon div {
-      width: 48px; height: 48px;
-      background: #eef0ff;
+      width: 50px;
+      height: 50px;
+      background: #f0f4ff;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 8px;
-      font-size: 1.5rem; color: #6b5cff;
+      font-size: 1.7rem;
+      color: #4f46e5;
     }
-    .list { background: #6b5cff; color: white; border-radius: 18px; padding: 18px; margin-bottom: 20px; }
-    .list p { margin: 8px 0; font-size: 0.95rem; }
-    .processing { text-align: center; padding: 40px 0; }
+    .processing {
+      text-align: center;
+      padding: 50px 20px;
+    }
     .spinner {
-      width: 50px; height: 50px;
-      border: 5px solid #e5e7eb;
-      border-top: 5px solid #6b5cff;
+      width: 56px;
+      height: 56px;
+      border: 6px solid #e2e8f0;
+      border-top: 6px solid #4f46e5;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 15px;
+      margin: 0 auto 20px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
     pre {
       background: #f8fafc;
-      padding: 16px;
-      border-radius: 12px;
+      padding: 18px;
+      border-radius: 16px;
       white-space: pre-wrap;
       font-size: 0.95rem;
       overflow-x: auto;
+      line-height: 1.6;
     }
     .copy {
       background: #22c55e;
       color: white;
       border: none;
-      padding: 14px;
+      padding: 16px;
       width: 100%;
       border-radius: 50px;
       font-weight: 900;
@@ -149,33 +266,76 @@
       cursor: pointer;
     }
     #custom-alert {
-      position: fixed; top: 50%; left: 50%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%) scale(0.8);
-      background: linear-gradient(135deg, #ff4d4d, #ff2f7b);
+      background: linear-gradient(135deg, #ef4444, #ec4899);
       color: white;
       font-weight: bold;
-      padding: 18px 30px;
+      padding: 20px 32px;
       border-radius: 20px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       text-align: center;
       z-index: 9999;
       opacity: 0;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
       transition: all 0.4s ease;
     }
-    #custom-alert.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    .footer { text-align: center; color: white; margin-top: 30px; font-size: 0.95rem; }
-    .footer h3 { margin: 0; font-size: 1.4rem; }
+    #custom-alert.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .footer {
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      margin-top: 40px;
+      padding: 20px 0;
+      font-size: 0.95rem;
+    }
+    .footer h3 {
+      font-size: 1.55rem;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:1.6rem;
+  font-weight:800;
+  color:#4f46e5;
+}
+
+.logo img{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  object-fit:cover;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
   </style>
 </head>
 <body>
+   <div class="container">
+  <!-- Header -->
+  <div class="header-bar">
+    <div class="logo">🛍️ REALSELER</div>
+    <button class="menu-btn" id="menuBtn">⋮</button>
+  </div>
 
-<div class="container">
+  <div class="dropdown" id="dropdown">
+    <a href="https://b43si.sawanenter7209.workers.dev/" target="_self">🏠 Home</a>
+    <a href="https://tmb32l.sawanenter7209.workers.dev/" target="_self">📧 Temp Mail ID</a>
+    <a href="https://ohtpnk.sawanenter7209.workers.dev/" target="_self">📧 Outlook ID / Hotmail ID</a>
+    <a href="https://gnpks4.sawanenter7209.workers.dev/" target="_self">📧 Gmail ID</a>
+  </div>
 
   <div class="card" id="select">
-    <div class="header">🛍️ REALSELER <small>PREMIUM ID STORE</small></div>
     <div class="badge">⚡ Limited Stock!</div>
     <div class="stock">Verify IDs: <span id="stock">Loading...</span></div>
+    
     <div class="note">
       Fresh verified accounts<br>
       Automatic delivery after payment<br>
@@ -189,17 +349,15 @@
       <div class="box" onclick="pick(5, this)">5 IDs <span id="p5"></span></div>
       <div class="box" onclick="pick(10, this)">10 IDs <span id="p10"></span></div>
     </div>
-
     <input type="number" class="custom" placeholder="Custom quantity" min="1" oninput="customQty(this.value)">
     
     <button class="buy" id="buy" disabled>Buy Now (Premium)</button>
-    <button class="normal-btn" onclick="openNormalIDs()">Normal IDs</button>
 
     <div class="icons">
       <div class="icon"><div>🔒</div>Secure</div>
       <div class="icon"><div>⚡</div>Instant</div>
       <div class="icon" onclick="openWhatsApp()">
-        <div><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:26px;height:26px;"></div>
+        <div><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:28px;height:28px;"></div>
         Support
       </div>
     </div>
@@ -213,22 +371,17 @@
   </div>
 
   <div class="card" id="payment" style="display:none">
-    <h3 style="text-align:center; color:#6b5cff;">Scan & Pay</h3>
-    <p style="text-align:center; margin:10px 0;">
+    <h3 style="text-align:center; color:#4f46e5;">Complete Secure Payment</h3>
+    <p style="text-align:center; margin:15px 0; font-size:1.1rem;">
       Quantity: <b id="pq"></b><br>
-      Total: ₹<b id="pa"></b>
+      Total Amount: ₹<b id="pa"></b>
     </p>
-    
-   
-    <img id="qr" width="220" style="display:block; margin:20px auto; border-radius:12px;" alt="Fixed UPI QR Code">
-    
-    <input type="text" id="utr" class="custom" placeholder="Enter 12-digit UTR" maxlength="12">
-    <button class="buy" onclick="submit()">Submit Payment</button>
+    <button class="buy" onclick="openRazorpayCheckout()">💳 Pay with Razorpay</button>
   </div>
 
   <div class="card processing" id="processing" style="display:none">
     <div class="spinner"></div>
-    <p>Verifying Payment...<br>Please wait</p>
+    <p>Payment Verified!<br>Delivering IDs Automatically...</p>
   </div>
 
   <div class="card" id="success" style="display:none">
@@ -244,80 +397,39 @@
     <p>Premium ID Provider • Trusted Service</p>
     <p>© 2026 All Rights Reserved</p>
   </div>
-
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getDatabase, ref, onValue, push, update, get, query, limitToFirst, remove } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
 
- 
   const CONFIG_URL = "https://na.sawanenter7209.workers.dev/config";
 
-  let db;
+  let db, price = 50, qty = 0, stockCount = 0;
+  let currentOrderId = "";
 
   async function initFirebase() {
     try {
       const res = await fetch(CONFIG_URL);
       const firebaseConfig = await res.json();
-
       const app = initializeApp(firebaseConfig);
       db = getDatabase(app);
-
-      startApp(); // 👉 init ke baad app start hoga
+      startApp();
     } catch (err) {
       console.error("Firebase load error:", err);
-      alert("Server connection failed ❌");
+      showAlert("Server connection failed ❌");
     }
   }
 
-  const stockEl = document.getElementById('stock');
-  const buyBtn = document.getElementById('buy');
-  const selectDiv = document.getElementById('select');
-  const paymentDiv = document.getElementById('payment');
-  const processingDiv = document.getElementById('processing');
-  const successDiv = document.getElementById('success');
-  const pqEl = document.getElementById('pq');
-  const paEl = document.getElementById('pa');
-  const qrEl = document.getElementById('qr');
-  const utrEl = document.getElementById('utr');
-  const idsEl = document.getElementById('ids');
-
-  const CLOUDFLARE_WORKER_URL = "https://haa.sawanenter7209.workers.dev/";
-  const whatsappNumber = "84947229295";
-
-  let qty = 0;
-  let price = 0;
-  let orderId = "";
-  let stockCount = 0;
-  let shopOpen = true;
-
-  function showAlert(msg) {
-    const alertBox = document.getElementById('custom-alert');
-    alertBox.textContent = msg;
-    alertBox.classList.add('show');
-    setTimeout(() => alertBox.classList.remove('show'), 3000);
-  }
-
-  function isClosed() {
-    const hour = new Date().getHours();
-    return hour >= 0 && hour < 6;
-  }
-
   function startApp() {
-
-    onValue(ref(db, "settings/shopOpen"), snap => {
-      shopOpen = snap.exists() ? snap.val() : true;
-    });
-
     onValue(ref(db, "stock"), snap => {
       let count = 0;
       snap.forEach(child => {
-        if (!child.val().sold) count++;
+        const data = child.val();
+        if (!data.sold && data.username && data.password) count++;
       });
       stockCount = count;
-      stockEl.textContent = count;
-      buyBtn.disabled = count === 0;
+      document.getElementById('stock').textContent = count;
     });
 
     onValue(ref(db, "settings/pricePerId"), snap => {
@@ -327,23 +439,21 @@
       document.getElementById('p5').textContent = "₹" + (price * 5);
       document.getElementById('p10').textContent = "₹" + (price * 10);
     });
-
   }
 
   window.pick = (q, el) => {
-   // if (!shopOpen || isClosed()) return showAlert("⏰ Shop is closed now");
     if (stockCount === 0) return showAlert("❌ No stock left");
     if (q > stockCount) return showAlert("Not enough stock");
-
     qty = q;
     document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
     el.classList.add('active');
-    buyBtn.textContent = `Buy Now (Premium) ₹${qty * price}`;
-    buyBtn.disabled = false;
+    document.getElementById('buy').textContent = `Buy Now (Premium) ₹${qty * price}`;
+    document.getElementById('buy').disabled = false;
   };
 
   window.customQty = (val) => {
     qty = Number(val) || 0;
+    const buyBtn = document.getElementById('buy');
     if (qty > 0) {
       buyBtn.textContent = `Buy Now (Premium) ₹${qty * price}`;
       buyBtn.disabled = false;
@@ -352,121 +462,160 @@
     }
   };
 
-  buyBtn.onclick = async () => {
+  document.getElementById('buy').onclick = async () => {
     if (qty <= 0) return showAlert("Select quantity first");
     if (qty > stockCount) return showAlert("Not enough stock");
 
-    orderId = push(ref(db, "orders")).key;
+    currentOrderId = push(ref(db, "orders")).key;
 
-    push(ref(db, "orders"), {
+    await push(ref(db, "orders"), {
+      orderId: currentOrderId,
       qty,
       amount: qty * price,
       status: "created",
-      time: Date.now(),
-      orderId
+      time: Date.now()
     });
 
-    selectDiv.style.display = "none";
-    paymentDiv.style.display = "block";
-
-    pqEl.textContent = qty;
-    paEl.textContent = qty * price;
-
-    qrEl.src = `${CLOUDFLARE_WORKER_URL}qr?${Date.now()}`;
+    document.getElementById('select').style.display = "none";
+    document.getElementById('payment').style.display = "block";
+    document.getElementById('pq').textContent = qty;
+    document.getElementById('pa').textContent = qty * price;
   };
 
-  window.submit = () => {
-    const utrVal = utrEl.value.trim();
-    if (!utrVal) return showAlert("Enter UTR number");
-    if (!/^\d{12}$/.test(utrVal)) return showAlert("Invalid UTR - exactly 12 digits");
+  window.openRazorpayCheckout = () => {
+    const options = {
+      key: "rzp_live_SYzLrl12FnenO2",
+      amount: (qty * price) * 100,
+      currency: "INR",
+      name: "REALSELER",
+      description: `${qty} Premium Outlook/Hotmail IDs`,
+      handler: function (response) {
+        handleSuccessfulPayment(response);
+      },
+      theme: { color: "#4f46e5" }
+    };
 
-    update(ref(db, "orders/" + orderId), {
-      utr: utrVal,
-      status: "pending"
-    });
-
-    paymentDiv.style.display = "none";
-    processingDiv.style.display = "block";
-
-    onValue(ref(db, "orders/" + orderId + "/status"), snap => {
-      if (snap.val() === "verified") {
-        deliverAndRemoveFromStock();
-      }
-    });
-
-    onValue(ref(db, "rejected/" + orderId), snap => {
-      if (snap.exists()) {
-        processingDiv.style.display = "none";
-        selectDiv.style.display = "block";
-        showAlert("❌ Payment not matched / rejected");
-        remove(ref(db, "rejected/" + orderId));
-      }
-    });
+    const rzp = new Razorpay(options);
+    rzp.open();
   };
 
+  async function handleSuccessfulPayment(response) {
+    document.getElementById('payment').style.display = "none";
+    document.getElementById('processing').style.display = "block";
+
+    await update(ref(db, "orders/" + currentOrderId), {
+      status: "paid",
+      razorpay_payment_id: response.razorpay_payment_id
+    });
+
+    deliverAndRemoveFromStock();
+  }
+
+  // ==================== FINAL FIXED DELIVERY ====================
   async function deliverAndRemoveFromStock() {
     try {
-      const stockRef = ref(db, "stock");
-      const snapshot = await get(query(stockRef, limitToFirst(qty + 10)));
+      const snapshot = await get(query(ref(db, "stock"), limitToFirst(qty + 25)));
 
       let available = [];
       snapshot.forEach(child => {
-        const val = child.val();
-        if (!val.sold) available.push({ key: child.key, data: val });
+        const data = child.val();
+        if (!data.sold && data.username && data.password) {
+          available.push({ key: child.key, data: data });
+        }
       });
 
       if (available.length < qty) {
-        idsEl.textContent = "Error: Not enough valid stock at delivery time";
-        processingDiv.style.display = "none";
-        successDiv.style.display = "block";
+        document.getElementById('ids').textContent = `Error: Only ${available.length} valid IDs found. Contact support.`;
+        document.getElementById('processing').style.display = "none";
+        document.getElementById('success').style.display = "block";
         return;
       }
 
       let deliveredText = "";
       const keysToRemove = [];
+      const deliveredRecords = [];
 
       for (let i = 0; i < qty; i++) {
-        const item = available[i];
-        const d = item.data;
-        deliveredText += `${d.username || 'N/A'}\n${d.password || 'N/A'}\n${d.phone || 'N/A'}\n${d.email || 'N/A'}\n\n`;
-        keysToRemove.push(item.key);
+        const d = available[i].data;
+
+        let line = `${d.username || 'N/A'}\n${d.password || 'N/A'}\n`;
+
+        // Phone field optional hai
+        if (d.phone) line += `${d.phone}\n`;
+        else if (d.number) line += `${d.number}\n`;
+
+        // Email field
+        if (d.email) line += `${d.email}\n`;
+
+        deliveredText += line + "\n";
+
+        // Save record for delivered_successful
+        deliveredRecords.push({
+          username: d.username,
+          password: d.password,
+          phone: d.phone || d.number || null,
+          email: d.email || null,
+          deliveredAt: Date.now(),
+          orderId: currentOrderId
+        });
+
+        keysToRemove.push(available[i].key);
       }
 
-      const removePromises = keysToRemove.map(key => remove(ref(db, `stock/${key}`)));
-      await Promise.all(removePromises);
+      // Remove from stock
+      await Promise.all(keysToRemove.map(key => remove(ref(db, `stock/${key}`))));
 
-      idsEl.textContent = deliveredText.trim() || "Delivered - contact support if empty";
-      processingDiv.style.display = "none";
-      successDiv.style.display = "block";
+      // Save to delivered_successful
+      await Promise.all(deliveredRecords.map(record => 
+        push(ref(db, "delivered_successful"), record)
+      ));
 
-      showAlert("Stock updated - " + qty + " IDs removed");
+      document.getElementById('ids').textContent = deliveredText.trim();
+      document.getElementById('processing').style.display = "none";
+      document.getElementById('success').style.display = "block";
+      showAlert(`✅ ${qty} IDs Delivered Successfully!`);
     } catch (err) {
       console.error("Delivery error:", err);
       showAlert("Delivery failed - contact support");
-      processingDiv.style.display = "none";
-      selectDiv.style.display = "block";
+      document.getElementById('processing').style.display = "none";
     }
   }
 
+  function showAlert(msg) {
+    const alertBox = document.getElementById('custom-alert');
+    alertBox.textContent = msg;
+    alertBox.classList.add('show');
+    setTimeout(() => alertBox.classList.remove('show'), 3000);
+  }
+
   window.copy = () => {
-    navigator.clipboard.writeText(idsEl.textContent)
+    navigator.clipboard.writeText(document.getElementById('ids').textContent)
       .then(() => showAlert("✅ Copied!"))
       .catch(() => showAlert("Copy failed"));
   };
 
   window.openWhatsApp = () => {
-    window.open(`https://wa.me/${whatsappNumber}?text=Hello REALSELER Support! Need help.`, "_blank");
+    const message = encodeURIComponent("Hello REALSELER Support! I need help.");
+    window.open(`https://wa.me/84947229295?text=${message}`, "_blank");
   };
 
-  window.openNormalIDs = () => {
-     window.location.href = "https://reala.shibhamsinghabcd2004.workers.dev/";
-    };
+  // Menu Dropdown
+  const menuBtn = document.getElementById('menuBtn');
+  const dropdown = document.getElementById('dropdown');
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+  });
+  document.addEventListener('click', () => dropdown.classList.remove('show'));
+  dropdown.addEventListener('click', (e) => e.stopPropagation());
 
-  // 🔥 INIT FIREBASE FROM WORKER
   window.onload = () => {
     initFirebase();
+
+    const script = document.createElement('script');
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    document.head.appendChild(script);
   };
 </script>
-
 </body>
 </html>
